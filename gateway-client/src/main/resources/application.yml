@@ -1,0 +1,49 @@
+
+test:
+  uri: lb://service-one
+
+spring:
+  application:
+    name: gateway-client
+  cloud:
+    gateway:
+      routes:
+#      - id: route_service_one
+#        uri: http://localhost:8081
+#        predicates:
+#        - Path=/user/who
+      - id: route_service_one
+        uri: ${test.uri} # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+        predicates:
+        - Path=/userapi/**
+        filters:
+        - StripPrefix=1 # 表示在转发时去掉userapi
+
+      - id: userapi2_route
+        uri: ${test.uri}
+        predicates:
+        - Path=/userapi2/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: myfallbackcmd
+            fallbackUri: forward:/user/fallback
+
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    enabled: true # 是否启用注册服务 默认为true, false是不启用
+  instance:
+    prefer-ip-address: true
