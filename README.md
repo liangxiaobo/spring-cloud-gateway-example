@@ -1,7 +1,9 @@
 
 Spring Cloud Gateway是Spring Cloud官方推出的第二代网关框架，取代Zuul网关。网关作为流量的，在微服务系统中有着非常作用，网关常见的功能有路由转发、权限校验、限流控制等作用。
 
-**项目结构**
+
+##项目结构
+
 | 项目 | 端口 |描述 |
 | ------ | ------ | ------ |
 | eureka-server | 8761 | 服务的注册与发现 |
@@ -296,13 +298,9 @@ spring:
 ![](https://upload-images.jianshu.io/upload_images/2151905-e6e982fc19c85124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/760)
 
 > reference
-
 [Hystrix wiki](https://github.com/Netflix/Hystrix/wiki/Configuration)
-
 [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway#overview)
-
 [Redis RateLimiter](https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.0.M1/single/spring-cloud-gateway.html#_redis_ratelimiter)
-
 [转载他人的写好的Redis RateLimiter实现](https://segmentfault.com/a/1190000015442572)
 
 
