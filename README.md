@@ -1,7 +1,6 @@
 
 Spring Cloud Gateway是Spring Cloud官方推出的第二代网关框架，取代Zuul网关。网关作为流量的，在微服务系统中有着非常作用，网关常见的功能有路由转发、权限校验、限流控制等作用。
 
-
 ## 项目结构
 
 | 项目 | 端口 |描述 |
@@ -11,7 +10,7 @@ Spring Cloud Gateway是Spring Cloud官方推出的第二代网关框架，取代
 | gateway-client  | 8080 | 网关 gateway  |
 
 
-##eureka-server
+## eureka-server
 eureka-server项目非常简单 引入
 ```xml
 <dependency>
@@ -48,7 +47,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 ```
 
-##service-one 项目
+## service-one 项目
 搭建非常简单，添加依赖
 ```xml
         <dependency>
@@ -108,7 +107,7 @@ public class OrderController {
     }
 }
 ```
-##gateway-client项目
+## gateway-client项目
 使用的是Finchley.SR2版本的，其中已经包含了 ```spring-boot-starter-webflux```
 添加依赖
 ```xml
@@ -187,12 +186,13 @@ eureka:
 
 ![WX20181113-180339@2x.png](https://upload-images.jianshu.io/upload_images/2151905-677ac37e6aedef6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/760)
 
-###不启用注册中心
+### 不启用注册中心
 即使集成了eureka-client也不想使用注册中心服务，可以关闭
 ```xml
 eureka.client.enabled=false
 ```
-###StripPrefix属性的使用
+### StripPrefix属性的使用
+
 按照上面的配置，每一个路由只能对应一个控制器的转发，不够灵活，假如我想让userapi的请求都转到service-one服务，比如：
 * http://localhost:8080/userapi/user/who => http://localhost:8081/user/who
 * http://localhost:8080/userapi/order/info => http://localhost:8081/order/info
@@ -216,7 +216,7 @@ spring:
 
 ![](https://upload-images.jianshu.io/upload_images/2151905-26d08c50e6d1e4c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/760)
 
-##使用Hystrix
+## 使用Hystrix
 在gateway-client项目中引入依赖
 ```xml
         <dependency>
@@ -301,6 +301,6 @@ spring:
 [Hystrix wiki](https://github.com/Netflix/Hystrix/wiki/Configuration)</br>
 [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway#overview)</br>
 [Redis RateLimiter](https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.0.M1/single/spring-cloud-gateway.html#_redis_ratelimiter)</br>
-[转载他人的写好的Redis RateLimiter实现](https://segmentfault.com/a/1190000015442572)</br>
+[转载他人的写好的Redis RateLimiter实现](https://segmentfault.com/a/1190000015442572)
 
 
